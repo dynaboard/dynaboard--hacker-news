@@ -1,14 +1,11 @@
 runtimeVersion: 0.2.14
-name: Hacker news
-description: A HackerNews clone
+name: Hackernews
+description: A HackerNews clone in Dynaboard
 type: com.dynaboard/project
 nodes:
   ROOT_NODE:
-    id: ROOT_NODE
     type: ROOT_NODE
     name: ROOT_NODE
-    parentNodeID: ROOT_NODE
-    parentSlot: ROOT_NODE
     slots:
       templates:
         - nodeID: b6ef8384-9470-4481-bc3e-24a400ed81c2
@@ -21,55 +18,55 @@ nodes:
           orderKey: a1
         - nodeID: c7b57e52-a2a4-44ad-b62d-0482955be0d4
           orderKey: a4
-  8bd18b0c-879a-4c1e-b8a1-9b93aa37e01d:
-    id: 8bd18b0c-879a-4c1e-b8a1-9b93aa37e01d
-    type: RESOURCE/TYPESCRIPT_CLIENT
-    name: typescript_client1
-    parentNodeID: ROOT_NODE
-    parentSlot: resources
-    properties: {}
-  c7b57e52-a2a4-44ad-b62d-0482955be0d4:
-    id: c7b57e52-a2a4-44ad-b62d-0482955be0d4
-    type: RESOURCE/HTTP
-    name: HNAPI
-    parentNodeID: ROOT_NODE
-    parentSlot: resources
+  01b79dc6-a464-4718-9314-b5fff92c15e6:
+    type: FUNCTION
+    name: getTopStories
     properties:
-      bodyType: application/json
-      baseURL: https://hacker-news.firebaseio.com/v0
-      method: GET
-  79b70e0e-4ef5-4a5e-b70e-1d250c2efad9:
-    id: 79b70e0e-4ef5-4a5e-b70e-1d250c2efad9
-    type: PAGE
-    name: index
-    parentNodeID: ROOT_NODE
-    parentSlot: pages
-    slots:
-      functions:
-        - nodeID: 5d409401-8067-441b-8f7c-eea0e767ebf0
-          orderKey: a2
-        - nodeID: 01b79dc6-a464-4718-9314-b5fff92c15e6
-          orderKey: a3
-      variables:
-        - nodeID: 0d61623a-1a7f-47a4-8066-6b2d1894631c
-          orderKey: a5
-      canvas:
-        - nodeID: 4e5efeae-e68d-4d11-9847-176c432eb82e
-          orderKey: a1
+      action:
+        targetNode:
+          ref: c7b57e52-a2a4-44ad-b62d-0482955be0d4
+        actionType: PERFORM_REQUEST
+        path: /topstories.json
+        method: GET
+      runOnPageLoad: '{{true}}'
+      onSuccess:
+        function:
+          ref: 5d409401-8067-441b-8f7c-eea0e767ebf0
+      onFailure: ''
+  0d61623a-1a7f-47a4-8066-6b2d1894631c:
+    type: LOCAL_VARIABLE
+    name: page
     properties:
-      layoutStyle: VERTICAL_STACK
-      padding: '0'
-      spacing: '0'
-      gridRowHeight: 16px
-      gridRowGap: 4px
-      gridColumnGap: 4px
-      minWidth: ''
+      value: '{{ 0 }}'
+  22cd5860-967c-4069-9445-94d6d34d4c5a:
+    type: MEDIA
+    name: logo
+    properties:
+      width: 20px
+      height: 20px
+      widthMode: FIXED
+      heightMode: FIXED
+      url: /favicon.ico
+      onLoad: ''
+      onError: ''
+      onPlay: ''
+      onPause: ''
+  377d2003-988b-46bf-8e05-111bc86ba5b6:
+    type: TEXT
+    name: appTitle
+    properties:
+      height: 20px
+      widthMode: AUTO
+      heightMode: FIXED
+      value: DynaHacker News
+      fontSize: 10pt
+      verticalAlign: center
+      fontWeight: '900'
+      color: '#000'
+      overflow: auto
   41eba239-f048-4d7d-a416-f0f79d0fa962:
-    id: 41eba239-f048-4d7d-a416-f0f79d0fa962
     type: CONTAINER
     name: header
-    parentNodeID: 4e5efeae-e68d-4d11-9847-176c432eb82e
-    parentSlot: canvas
     slots:
       canvas:
         - nodeID: 22cd5860-967c-4069-9445-94d6d34d4c5a
@@ -93,11 +90,8 @@ nodes:
       gridRowGap: 4px
       gridColumnGap: 4px
   4e5efeae-e68d-4d11-9847-176c432eb82e:
-    id: 4e5efeae-e68d-4d11-9847-176c432eb82e
     type: CONTAINER
     name: total
-    parentNodeID: 79b70e0e-4ef5-4a5e-b70e-1d250c2efad9
-    parentSlot: canvas
     slots:
       canvas:
         - nodeID: 41eba239-f048-4d7d-a416-f0f79d0fa962
@@ -122,70 +116,9 @@ nodes:
       gridRowHeight: 16px
       gridRowGap: 4px
       gridColumnGap: 4px
-  377d2003-988b-46bf-8e05-111bc86ba5b6:
-    id: 377d2003-988b-46bf-8e05-111bc86ba5b6
-    type: TEXT
-    name: appTitle
-    parentNodeID: 41eba239-f048-4d7d-a416-f0f79d0fa962
-    parentSlot: canvas
-    properties:
-      height: 20px
-      widthMode: AUTO
-      heightMode: FIXED
-      value: DynaHacker News
-      fontSize: 10pt
-      verticalAlign: center
-      fontWeight: '900'
-      color: '#000'
-      overflow: auto
-  22cd5860-967c-4069-9445-94d6d34d4c5a:
-    id: 22cd5860-967c-4069-9445-94d6d34d4c5a
-    type: MEDIA
-    name: logo
-    parentNodeID: 41eba239-f048-4d7d-a416-f0f79d0fa962
-    parentSlot: canvas
-    properties:
-      width: 20px
-      height: 20px
-      widthMode: FIXED
-      heightMode: FIXED
-      url: /favicon.ico
-      onLoad: ''
-      onError: ''
-      onPlay: ''
-      onPause: ''
-  0d61623a-1a7f-47a4-8066-6b2d1894631c:
-    id: 0d61623a-1a7f-47a4-8066-6b2d1894631c
-    type: LOCAL_VARIABLE
-    name: page
-    parentNodeID: 79b70e0e-4ef5-4a5e-b70e-1d250c2efad9
-    parentSlot: variables
-    properties:
-      value: '{{ 0 }}'
-  01b79dc6-a464-4718-9314-b5fff92c15e6:
-    id: 01b79dc6-a464-4718-9314-b5fff92c15e6
-    type: FUNCTION
-    name: getTopStories
-    parentNodeID: 79b70e0e-4ef5-4a5e-b70e-1d250c2efad9
-    parentSlot: functions
-    properties:
-      action:
-        targetNode:
-          ref: c7b57e52-a2a4-44ad-b62d-0482955be0d4
-        actionType: PERFORM_REQUEST
-        path: /topstories.json
-        method: GET
-      runOnPageLoad: '{{true}}'
-      onSuccess:
-        function:
-          ref: 5d409401-8067-441b-8f7c-eea0e767ebf0
-      onFailure: ''
   5d409401-8067-441b-8f7c-eea0e767ebf0:
-    id: 5d409401-8067-441b-8f7c-eea0e767ebf0
     type: FUNCTION
     name: getByID
-    parentNodeID: 79b70e0e-4ef5-4a5e-b70e-1d250c2efad9
-    parentSlot: functions
     properties:
       action:
         targetNode:
@@ -207,102 +140,24 @@ nodes:
       runOnPageLoad: '{{true}}'
       onSuccess: ''
       onFailure: ''
-  b6ef8384-9470-4481-bc3e-24a400ed81c2:
-    id: b6ef8384-9470-4481-bc3e-24a400ed81c2
-    type: TEMPLATE
-    name: hnStory
-    parentNodeID: ROOT_NODE
-    parentSlot: templates
-    slots:
-      canvas:
-        - nodeID: ce33b1d2-f7d0-4979-a846-540ec7d48259
-          orderKey: a1
-        - nodeID: 7514836f-d412-4ec7-bf88-0db02e129cc6
-          orderKey: a2
+  721ca27a-7bce-4529-a8e3-36fe1bb0ec5d:
+    type: ITERATOR
+    name: stories
     properties:
-      minHeight: 29px
-      height: 32px
-      maxHeight: 58px
-      minWidth: 320px
-      maxWidth: 960px
-      backgroundColor: transparent
-      layoutStyle: HORIZONTAL_STACK
-      spacing: 4px
-      styles: |-
-        element.styles {
-            padding-x: 6px;
-        }
-  d482c951-8172-48fa-b643-3d2c708fc124:
-    id: d482c951-8172-48fa-b643-3d2c708fc124
-    type: CONTAINER
-    name: container1
-    parentNodeID: 7514836f-d412-4ec7-bf88-0db02e129cc6
-    parentSlot: canvas
-    slots:
-      canvas:
-        - nodeID: 80260891-18d8-4538-9de6-4739a1257c99
-          orderKey: Zz
-        - nodeID: d89fbdf6-e7bb-4d1c-aae3-b241ec76e644
-          orderKey: a0
-    properties:
+      top: NaN
+      left: NaN
       width: fill
-      height: 10px
-      widthMode: FILL
+      height: 912px
+      widthMode: FIXED
       heightMode: FIXED
-      layoutStyle: HORIZONTAL_STACK
-      padding: '0'
-      spacing: 8px
-      backgroundColor: transparent
-      boxShadow: none
-      distributeContent: ''
-      alignContent: center
-      gridRowHeight: 16px
-      gridRowGap: 4px
-      gridColumnGap: 4px
-      overflow: hidden
-  80260891-18d8-4538-9de6-4739a1257c99:
-    id: 80260891-18d8-4538-9de6-4739a1257c99
-    type: TEXT
-    name: text1
-    parentNodeID: d482c951-8172-48fa-b643-3d2c708fc124
-    parentSlot: canvas
-    properties:
-      width: 64px
-      height: fill
-      widthMode: AUTO
-      heightMode: FILL
-      value: '{{ scope?.score ?? 0}} points by {{scope?.by ?? ''author''}} | '
-      fontSize: 9.333px
-      verticalAlign: bottom
-      fontWeight: '300'
-      color: '#707173'
-      overflow: auto
-  d89fbdf6-e7bb-4d1c-aae3-b241ec76e644:
-    id: d89fbdf6-e7bb-4d1c-aae3-b241ec76e644
-    type: INLINE_REACT
-    name: inline_react2
-    parentNodeID: d482c951-8172-48fa-b643-3d2c708fc124
-    parentSlot: canvas
-    properties:
-      height: 10px
-      widthMode: AUTO
-      heightMode: FIXED
-      styles: |-
-        element.styles {
-            font-size: 9.333px;
-            top: -6px;
-            position: relative;
-        }
-      componentSource: |-
-        return function Component() {
-          return <a href="https://news.ycombinator.com/item?id={{ scope?.element?.id ?? 0 }}" target="_blank"><span style={ { color: '#707173', fontSize: '9.333px' } }> {{ scope?.descendants ?? 0 }} comments</span></a>
-        }
+      data: '{{(getByID.data ?? [])}}'
+      template: TEMPLATE/b6ef8384-9470-4481-bc3e-24a400ed81c2
+      padding: 8px
+      spacing: 4px
+      backgroundColor: '#f6f6ef'
   7514836f-d412-4ec7-bf88-0db02e129cc6:
-    id: 7514836f-d412-4ec7-bf88-0db02e129cc6
     type: CONTAINER
     name: container2
-    parentNodeID: b6ef8384-9470-4481-bc3e-24a400ed81c2
-    parentSlot: canvas
     slots:
       canvas:
         - nodeID: fe318254-e98a-4eff-b766-74074c0634d4
@@ -323,12 +178,89 @@ nodes:
       backgroundColor: transparent
       boxShadow: none
       distributeContent: ''
+  79b70e0e-4ef5-4a5e-b70e-1d250c2efad9:
+    type: PAGE
+    name: index
+    slots:
+      functions:
+        - nodeID: 5d409401-8067-441b-8f7c-eea0e767ebf0
+          orderKey: a2
+        - nodeID: 01b79dc6-a464-4718-9314-b5fff92c15e6
+          orderKey: a3
+      variables:
+        - nodeID: 0d61623a-1a7f-47a4-8066-6b2d1894631c
+          orderKey: a5
+      canvas:
+        - nodeID: 4e5efeae-e68d-4d11-9847-176c432eb82e
+          orderKey: a1
+    properties:
+      layoutStyle: VERTICAL_STACK
+      padding: '0'
+      spacing: '0'
+      gridRowHeight: 16px
+      gridRowGap: 4px
+      gridColumnGap: 4px
+      minWidth: ''
+  80260891-18d8-4538-9de6-4739a1257c99:
+    type: TEXT
+    name: text1
+    properties:
+      width: auto
+      height: fill
+      widthMode: AUTO
+      heightMode: FILL
+      styles: |-
+        element.styles {
+          font-size: 8px;
+          line-height: 10px;
+        }
+      value: '{{ scope?.score ?? 0}} points by {{scope?.by ?? ''author''}} | '
+      verticalAlign: bottom
+      fontWeight: '300'
+      color: '#707173'
+      overflow: hidden
+      textOverflow: clip
+  8bd18b0c-879a-4c1e-b8a1-9b93aa37e01d:
+    type: RESOURCE/TYPESCRIPT_CLIENT
+    name: typescript_client1
+  b6ef8384-9470-4481-bc3e-24a400ed81c2:
+    type: TEMPLATE
+    name: hnStory
+    slots:
+      canvas:
+        - nodeID: ce33b1d2-f7d0-4979-a846-540ec7d48259
+          orderKey: a1
+        - nodeID: 7514836f-d412-4ec7-bf88-0db02e129cc6
+          orderKey: a2
+    properties:
+      scope: |-
+        {
+         "title": "TITLE"
+        }
+      minHeight: 29px
+      height: 32px
+      maxHeight: 58px
+      minWidth: 320px
+      maxWidth: 960px
+      backgroundColor: transparent
+      layoutStyle: HORIZONTAL_STACK
+      spacing: 4px
+      styles: |-
+        element.styles {
+            padding-x: 6px;
+            overflow: hidden;
+        }
+      mergeDefaultScope: '{{false}}'
+  c7b57e52-a2a4-44ad-b62d-0482955be0d4:
+    type: RESOURCE/HTTP
+    name: HNAPI
+    properties:
+      bodyType: application/json
+      baseURL: https://hacker-news.firebaseio.com/v0
+      method: GET
   ce33b1d2-f7d0-4979-a846-540ec7d48259:
-    id: ce33b1d2-f7d0-4979-a846-540ec7d48259
     type: TEXT
     name: text2
-    parentNodeID: b6ef8384-9470-4481-bc3e-24a400ed81c2
-    parentSlot: canvas
     properties:
       width: 24px
       height: 19px
@@ -340,12 +272,50 @@ nodes:
       verticalAlign: center
       color: '#828282'
       overflow: auto
+  d482c951-8172-48fa-b643-3d2c708fc124:
+    type: CONTAINER
+    name: container1
+    slots:
+      canvas:
+        - nodeID: 80260891-18d8-4538-9de6-4739a1257c99
+          orderKey: Zz
+        - nodeID: d89fbdf6-e7bb-4d1c-aae3-b241ec76e644
+          orderKey: a0
+    properties:
+      width: 288px
+      height: 10px
+      widthMode: FILL
+      heightMode: FIXED
+      layoutStyle: HORIZONTAL_STACK
+      padding: '0'
+      spacing: 8px
+      backgroundColor: transparent
+      boxShadow: none
+      alignContent: center
+      gridRowHeight: 16px
+      gridRowGap: 4px
+      gridColumnGap: 4px
+      overflow: hidden
+  d89fbdf6-e7bb-4d1c-aae3-b241ec76e644:
+    type: INLINE_REACT
+    name: inline_react2
+    properties:
+      height: 10px
+      widthMode: AUTO
+      heightMode: FIXED
+      styles: |-
+        element.styles {
+            font-size: 9.333px;
+            top: -6px;
+            position: relative;
+        }
+      componentSource: |-
+        return function Component() {
+          return <a href="https://news.ycombinator.com/item?id={{ scope?.id ?? 0 }}" target="_blank"><span style={ { color: '#707173', fontSize: '9.333px' } }> {{ scope?.descendants ?? 0 }} comments</span></a>
+        }
   fe318254-e98a-4eff-b766-74074c0634d4:
-    id: fe318254-e98a-4eff-b766-74074c0634d4
     type: INLINE_REACT
     name: inline_react1
-    parentNodeID: 7514836f-d412-4ec7-bf88-0db02e129cc6
-    parentSlot: canvas
     properties:
       width: fill
       height: 19px
@@ -355,21 +325,3 @@ nodes:
         return function Component() {
           return <a href="{{ scope?.element?.url ?? 'https://news.ycombinator.com'}}" target="_blank"><p style={ {fontSize: '13.333px', color: '#000' } }>{{ scope?.title ?? 'title' }}</p></a>
         }
-  721ca27a-7bce-4529-a8e3-36fe1bb0ec5d:
-    id: 721ca27a-7bce-4529-a8e3-36fe1bb0ec5d
-    type: ITERATOR
-    name: stories
-    parentNodeID: 4e5efeae-e68d-4d11-9847-176c432eb82e
-    parentSlot: canvas
-    properties:
-      top: NaN
-      left: NaN
-      width: fill
-      height: 912px
-      widthMode: FIXED
-      heightMode: FIXED
-      data: '{{(getByID.data ?? [])}}'
-      template: TEMPLATE/b6ef8384-9470-4481-bc3e-24a400ed81c2
-      padding: 8px
-      spacing: 4px
-      backgroundColor: '#f6f6ef'
