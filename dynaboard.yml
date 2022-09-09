@@ -100,7 +100,7 @@ nodes:
           orderKey: a0
     properties:
       width: fill
-      height: 15360px
+      height: auto
       widthMode: FILL
       heightMode: AUTO
       styles: |-
