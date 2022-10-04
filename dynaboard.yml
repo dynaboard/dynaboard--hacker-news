@@ -1,4 +1,4 @@
-runtimeVersion: 0.2.14
+runtimeVersion: 0.3.0
 name: Hackernews
 description: A HackerNews clone in Dynaboard
 type: com.dynaboard/project
@@ -7,9 +7,6 @@ nodes:
     type: ROOT_NODE
     name: ROOT_NODE
     slots:
-      templates:
-        - nodeID: b6ef8384-9470-4481-bc3e-24a400ed81c2
-          orderKey: a0
       pages:
         - nodeID: 79b70e0e-4ef5-4a5e-b70e-1d250c2efad9
           orderKey: a0
@@ -18,6 +15,9 @@ nodes:
           orderKey: a1
         - nodeID: c7b57e52-a2a4-44ad-b62d-0482955be0d4
           orderKey: a4
+      components:
+        - nodeID: b6ef8384-9470-4481-bc3e-24a400ed81c2
+          orderKey: a0
   01b79dc6-a464-4718-9314-b5fff92c15e6:
     type: FUNCTION
     name: getTopStories
@@ -151,10 +151,10 @@ nodes:
       widthMode: FIXED
       heightMode: FIXED
       data: '{{(getByID.data ?? [])}}'
-      template: TEMPLATE/b6ef8384-9470-4481-bc3e-24a400ed81c2
       padding: 8px
       spacing: 4px
       backgroundColor: '#f6f6ef'
+      component: COMPONENT/b6ef8384-9470-4481-bc3e-24a400ed81c2
   7514836f-d412-4ec7-bf88-0db02e129cc6:
     type: CONTAINER
     name: container2
@@ -224,7 +224,7 @@ nodes:
     type: RESOURCE/TYPESCRIPT_CLIENT
     name: typescript_client1
   b6ef8384-9470-4481-bc3e-24a400ed81c2:
-    type: TEMPLATE
+    type: COMPONENT
     name: hnStory
     slots:
       canvas:
