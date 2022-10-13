@@ -323,5 +323,5 @@ nodes:
       heightMode: FIXED
       componentSource: |-
         return function Component() {
-          return <a href="{{ scope?.element?.url ?? 'https://news.ycombinator.com'}}" target="_blank"><p style={ {fontSize: '13.333px', color: '#000' } }>{{ scope?.title ?? 'title' }}</p></a>
+          return <a href="{{ scope?.url ?? 'https://news.ycombinator.com'}}" target="_blank"><p style={ {fontSize: '13.333px', color: '#000' } }>{{ scope?.title ?? 'title' }}</p></a>
         }
