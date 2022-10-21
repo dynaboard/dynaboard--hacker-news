@@ -134,9 +134,9 @@ nodes:
 
           const mapped = []
           for (let id of topStories) {
-              mapped.push(await getStory(id))
+              mapped.push(getStory(id))
           }
-          return mapped
+          return Promise.all(mapped)
       runOnPageLoad: '{{true}}'
       onSuccess: ''
       onFailure: ''
