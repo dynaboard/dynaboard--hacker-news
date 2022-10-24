@@ -1,4 +1,4 @@
-runtimeVersion: 0.3.0
+runtimeVersion: 0.3.2
 name: Hackernews
 description: A HackerNews clone in Dynaboard
 type: com.dynaboard/project
@@ -60,7 +60,6 @@ nodes:
       heightMode: FIXED
       value: DynaHacker News
       fontSize: 10pt
-      verticalAlign: center
       fontWeight: '900'
       color: '#000'
       overflow: auto
@@ -214,7 +213,7 @@ nodes:
           font-size: 8px;
           line-height: 10px;
         }
-      value: '{{ scope?.score ?? 0}} points by {{scope?.by ?? ''author''}} | '
+      value: '{{ $props?.score ?? 0}} points by {{$props?.by ?? ''author''}} | '
       verticalAlign: bottom
       fontWeight: '300'
       color: '#707173'
@@ -233,7 +232,7 @@ nodes:
         - nodeID: 7514836f-d412-4ec7-bf88-0db02e129cc6
           orderKey: a2
     properties:
-      scope: |-
+      $props: |-
         {
          "title": "TITLE"
         }
@@ -250,7 +249,7 @@ nodes:
             padding-x: 6px;
             overflow: hidden;
         }
-      mergeDefaultScope: '{{false}}'
+      mergeDefaultProps: '{{false}}'
   c7b57e52-a2a4-44ad-b62d-0482955be0d4:
     type: RESOURCE/HTTP
     name: HNAPI
@@ -269,7 +268,6 @@ nodes:
       value: '{{ ($index ?? 0) + 1}}.'
       fontSize: 10pt
       textAlign: center
-      verticalAlign: center
       color: '#828282'
       overflow: auto
   d482c951-8172-48fa-b643-3d2c708fc124:
@@ -311,7 +309,7 @@ nodes:
         }
       componentSource: |-
         return function Component() {
-          return <a href="https://news.ycombinator.com/item?id={{ scope?.id ?? 0 }}" target="_blank"><span style={ { color: '#707173', fontSize: '9.333px' } }> {{ scope?.descendants ?? 0 }} comments</span></a>
+          return <a href="https://news.ycombinator.com/item?id={{ $props?.id ?? 0 }}" target="_blank"><span style={ { color: '#707173', fontSize: '9.333px' } }> {{ $props?.descendants ?? 0 }} comments</span></a>
         }
   fe318254-e98a-4eff-b766-74074c0634d4:
     type: INLINE_REACT
@@ -323,5 +321,5 @@ nodes:
       heightMode: FIXED
       componentSource: |-
         return function Component() {
-          return <a href="{{ scope?.url ?? 'https://news.ycombinator.com'}}" target="_blank"><p style={ {fontSize: '13.333px', color: '#000' } }>{{ scope?.title ?? 'title' }}</p></a>
+          return <a href="{{ $props?.url ?? 'https://news.ycombinator.com'}}" target="_blank"><p style={ {fontSize: '13.333px', color: '#000' } }>{{ $props?.title ?? 'title' }}</p></a>
         }
