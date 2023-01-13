@@ -340,11 +340,13 @@ nodes:
       left: NaN
       width: auto
       height: fill
+      overflow: hidden
       layoutStyle: HORIZONTAL_STACK
       padding: '0'
       spacing: '8'
       backgroundColor: transparent
       boxShadow: '0'
+      alignContent: center
   fe318254-e98a-4eff-b766-74074c0634d4:
     type: INLINE_REACT
     name: inline_react1
