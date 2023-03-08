@@ -1,4 +1,4 @@
-runtimeVersion: 0.3.4
+runtimeVersion: 0.4.0
 name: Hacker News
 description: A HackerNews clone in Dynaboard
 type: com.dynaboard/project
@@ -45,6 +45,7 @@ nodes:
     name: loadingSpinner
     properties:
       isVisible: '{{getTopStories.loading || getByID.loading}}'
+      isEnabled: '{{true}}'
       top: NaN
       left: NaN
       width: 28px
@@ -85,8 +86,8 @@ nodes:
         - nodeID: 1c5f6289-78fc-4ed2-b633-0481c38fbab5
           orderKey: a2
     properties:
-      top: '5'
-      left: '5'
+      top: NaN
+      left: NaN
       width: fill
       height: 28px
       widthMode: FILL
@@ -161,7 +162,7 @@ nodes:
       height: 912px
       widthMode: FIXED
       heightMode: FIXED
-      data: '{{(getByID.data ?? [])}}'
+      data: (getByID.data ?? [])
       padding: 8px
       spacing: 4px
       backgroundColor: '#f6f6ef'
@@ -213,6 +214,10 @@ nodes:
       gridColumnGap: 4px
       minWidth: ''
       backgroundColor: '#FFFFFFFF'
+      headerProps: {}
+      leftSidebarProps: {}
+      rightSidebarProps: {}
+      footerProps: {}
   80260891-18d8-4538-9de6-4739a1257c99:
     type: TEXT
     name: text1
@@ -226,7 +231,7 @@ nodes:
           font-size: 8px;
           line-height: 10px;
         }
-      value: '{{ $props?.score ?? 0}} points by {{$props?.by ?? ''author''}} | '
+      value: '{{ $props.score}} points by {{$props.by}} | '
       verticalAlign: bottom
       fontWeight: '300'
       color: '#707173'
@@ -245,10 +250,6 @@ nodes:
         - nodeID: 7514836f-d412-4ec7-bf88-0db02e129cc6
           orderKey: a2
     properties:
-      $props: |-
-        {
-         "title": "TITLE"
-        }
       minHeight: 29px
       height: 32px
       maxHeight: 58px
@@ -262,7 +263,39 @@ nodes:
             padding-x: 6px;
             overflow: hidden;
         }
-      mergeDefaultProps: false
+      props:
+        - id: a5d28a26-96f7-48c3-81f1-22ce5be05ad1
+          key: title
+          description: ''
+          propType: string
+          defaultValue: TITLE
+        - id: b3611049-1249-4a7c-a72c-ca69c5ae0a57
+          key: score
+          description: ''
+          propType: number
+          defaultValue: '0'
+        - id: 2bc43879-9072-4c0e-bead-6c4bb696efac
+          key: by
+          displayName: Author
+          description: ''
+          propType: string
+          defaultValue: author
+        - id: 384510dc-529d-4e9a-9f97-1a30a8feec90
+          key: descendants
+          description: ''
+          propType: number
+          defaultValue: '0'
+        - id: 10cd38c9-9899-4600-87eb-98ff7d3a03c6
+          key: id
+          displayName: Post ID
+          description: ''
+          propType: number
+          defaultValue: '0'
+        - id: daeab0da-547f-4f1a-a1a0-42e358d74c4e
+          key: url
+          description: ''
+          propType: string
+          defaultValue: https://news.ycombinator.com
   c7b57e52-a2a4-44ad-b62d-0482955be0d4:
     type: RESOURCE/HTTP
     name: HNAPI
@@ -324,7 +357,7 @@ nodes:
         }
       componentSource: |-
         return function Component() {
-          return <a href="https://news.ycombinator.com/item?id={{ $props?.id ?? 0 }}" target="_blank"><span style={ { color: '#707173', fontSize: '9.333px' } }> {{ $props?.descendants ?? 0 }} comments</span></a>
+          return <a href="https://news.ycombinator.com/item?id={{ $props.id }}" target="_blank"><span style={ { color: '#707173', fontSize: '9.333px' } }> {{ $props.descendants }} comments</span></a>
         }
   de802099-8ef4-4095-bdcc-a37572b4bea0:
     type: CONTAINER
@@ -336,6 +369,8 @@ nodes:
         - nodeID: 377d2003-988b-46bf-8e05-111bc86ba5b6
           orderKey: Zz
     properties:
+      isVisible: '{{true}}'
+      isEnabled: '{{true}}'
       top: NaN
       left: NaN
       width: auto
@@ -346,6 +381,7 @@ nodes:
       spacing: '8'
       backgroundColor: transparent
       boxShadow: '0'
+      borderRadius: '0'
       alignContent: center
   fe318254-e98a-4eff-b766-74074c0634d4:
     type: INLINE_REACT
@@ -357,5 +393,5 @@ nodes:
       heightMode: FIXED
       componentSource: |-
         return function Component() {
-          return <a href="{{ $props?.url ?? 'https://news.ycombinator.com'}}" target="_blank"><p style={ {fontSize: '13.333px', color: '#000', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' } }>{{ $props?.title ?? 'title' }}</p></a>
+          return <a href="{{ $props.url }}" target="_blank"><p style={ {fontSize: '13.333px', color: '#000', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' } }>{{ $props.title }}</p></a>
         }
