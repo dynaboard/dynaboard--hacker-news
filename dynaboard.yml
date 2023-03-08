@@ -111,8 +111,8 @@ nodes:
         - nodeID: 721ca27a-7bce-4529-a8e3-36fe1bb0ec5d
           orderKey: a0
     properties:
-      width: 960px
-      height: 944px
+      width: fill
+      height: auto
       widthMode: FILL
       heightMode: AUTO
       styles: |-
